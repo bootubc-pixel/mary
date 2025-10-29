@@ -1,3 +1,28 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "profile",
+      "description": "A portrait of a developer in a dark room with code on screen.",
+      "imageUrl": "https://images.unsplash.com/photo-1689218742390-78100d0eca33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3J0cmFpdCUyMGRldmVsb3BlcnxlbnwwfHx8fDE3NjE2NzMyMTB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "portrait developer"
+    },
+    {
+      "id": "project-1",
+      "description": "A dashboard UI for a web application.",
+      "imageUrl": "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx3ZWIlMjBhcHB8ZW58MHx8fHwxNzYxNzExMzA2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "web app"
+    },
+    {
+      "id": "project-2",
+      "description": "A sleek mobile application interface.",
+      "imageUrl": "https://images.unsplash.com/photo-1710993012169-eaaf875ecb77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bW9iaWxlJTIwaW50ZXJmYWNlfGVufDB8fHx8MTc2MTYzNDQ5OXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "mobile interface"
+    },
+    {
+      "id": "project-3",
+      "description": "An e-commerce website product page.",
+      "imageUrl": "https://images.unsplash.com/photo-1657812159075-7f0abd98f7b8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxlY29tbWVyY2UlMjB3ZWJzaXRlfGVufDB8fHx8MTc2MTc1MzI0NHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ecommerce website"
+    }
+  ]
 }
