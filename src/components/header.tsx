@@ -6,15 +6,18 @@ import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
 
 const navItems = [
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  { name: 'Skills', href: '/skills' },
   { name: 'Projects', href: '#projects' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 export default function Header() {
+  const pathname = usePathname();
   const [activeSection, setActiveSection] = useState('');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -23,37 +26,47 @@ export default function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
 
-      const sections = navItems.map(item => document.querySelector(item.href));
-      const scrollPosition = window.scrollY + 150;
+      if (pathname === '/') {
+        const sections = navItems.map(item => document.querySelector(item.href.startsWith('#') ? item.href : 'non-existent-selector')).filter(Boolean);
+        const scrollPosition = window.scrollY + 150;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navItems[i].href);
-          break;
+        let currentSection = '';
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const section = sections[i] as HTMLElement;
+          if (section && section.offsetTop <= scrollPosition) {
+            currentSection = section.id;
+            break;
+          }
         }
+        setActiveSection(`#${currentSection}`);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [pathname]);
 
   const NavLinks = ({ className, onItemClick }: { className?: string, onItemClick?: () => void }) => (
     <nav className={cn("flex items-center gap-6 text-lg font-medium", className)}>
-      {navItems.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          onClick={onItemClick}
-          className={cn(
-            "text-muted-foreground transition-colors hover:text-foreground",
-            activeSection === item.href && "text-primary font-semibold"
-          )}
-        >
-          {item.name}
-        </Link>
-      ))}
+      {navItems.map((item) => {
+        const isActive = pathname === '/'
+          ? (activeSection === item.href)
+          : (pathname === item.href);
+
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            onClick={onItemClick}
+            className={cn(
+              "text-muted-foreground transition-colors hover:text-foreground",
+              isActive && "text-primary font-semibold"
+            )}
+          >
+            {item.name}
+          </Link>
+        );
+      })}
     </nav>
   );
 
@@ -63,7 +76,7 @@ export default function Header() {
       isScrolled ? "border-b border-border/40 bg-background/80 backdrop-blur-lg" : ""
     )}>
       <div className="container flex h-20 items-center justify-between">
-        <Link href="#" className="text-2xl font-bold font-headline text-primary">
+        <Link href="/" className="text-2xl font-bold font-headline text-primary">
           Abdoshy
         </Link>
         
@@ -81,7 +94,7 @@ export default function Header() {
           <SheetContent side="right" className="w-full sm:max-w-xs bg-background">
             <div className="flex flex-col h-full">
               <div className="flex justify-between items-center border-b pb-4">
-                 <Link href="#" className="text-2xl font-bold font-headline text-primary">
+                 <Link href="/" className="text-2xl font-bold font-headline text-primary" onClick={() => setIsMobileMenuOpen(false)}>
                     Abdoshy
                 </Link>
                 <SheetTrigger asChild>
